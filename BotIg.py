@@ -40,9 +40,9 @@ class InstagramBot:
          driver.find_element_by_class_name('Ypffh').click()
          comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
          time.sleep(3)
-            self.typing_method(random.choice(comentario),comment_input)
-            comment_button = driver.find_element_by_xpath("//button[@type='submit']")
-            comment_button.click()
+         self.typing_method(random.choice(comentario),comment_input)
+         comment_button = driver.find_element_by_xpath("//button[@type='submit']")
+         comment_button.click()
 
 
 
