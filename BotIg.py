@@ -33,14 +33,13 @@ class InstagramBot:
             time.sleep(random.randint(1,8)/30)
 
     def comments(self,link):
-        
-        comentario = [] #Wordlist
-        driver =self.driver
-        driver.get("https://www.instagram.com/" + link)
-        driver.find_element_by_class_name('Ypffh').click()
-        comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
-        time.sleep(3)
         for i in range(5):
+         comentario = [] #Wordlist
+         driver =self.driver
+         driver.get("https://www.instagram.com/" + link)
+         driver.find_element_by_class_name('Ypffh').click()
+         comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
+         time.sleep(3)
             self.typing_method(random.choice(comentario),comment_input)
             comment_button = driver.find_element_by_xpath("//button[@type='submit']")
             comment_button.click()
