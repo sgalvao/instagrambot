@@ -4,10 +4,11 @@ import time
 import random
 import PySimpleGUI as sg
 
+VARIANT_GLOBAL_GECKODRIVER = ''
 
-login = input("Digite seu user:")
-senha = input('digite sua senha:')
-page = input('digite a URL da pagina:')
+#login = input("Digite seu user:")
+#senha = input('digite sua senha:')
+#page = input('digite a URL da pagina:')
 
 class InstagramBot:
     
@@ -16,7 +17,7 @@ class InstagramBot:
     def __init__(self,login,senha):
         self.username = login
         self.password = senha
-        self.driver = webdriver.Firefox(executable_path="C:\\Users\\silvi\\Documents\\geckodriver.exe")
+        self.driver = webdriver.Firefox(executable_path=VARIANT_GLOBAL_GECKODRIVER) #
 
 
     def login(self):
@@ -42,20 +43,28 @@ class InstagramBot:
 
     def comments(self,link):
         archive = open('wordlist.txt','r')
-        comentario =  archive.readline()#Wordlist
+        comentario =  archive.readlines()#Wordlist
         driver =self.driver
         driver.get(link)
         driver.find_element_by_class_name('Ypffh').click()
         comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
         time.sleep(3)
-        for i in range(10):
-            self.typing_method(random.choices(comentario),comment_input)
+        i = 0
+        for comment in comentario:
+            self.typing_method(comment,comment_input)
             comment_button = driver.find_element_by_xpath("//button[@type='submit']")
             comment_button.click()
-            time.sleep(10)
+            time.sleep(40)
+            if (i == 5):
+                time.sleep(1200)
+                i = 0
+            else:
+                i += 1
+            
+        
 
 
 
-startBot = InstagramBot(login, senha)#Username & password
+startBot = InstagramBot('accountbottest1', 'bottest123')#Username & password
 startBot.login()
-startBot.comments(page)#link post
+startBot.comments('https://www.instagram.com/p/CLNeLh5Fzq8/')#link post
