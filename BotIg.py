@@ -67,4 +67,4 @@ class InstagramBot:
 
 startBot = InstagramBot(login, senha )#Username & password
 startBot.login()
-startBot.comments('https://www.instagram.com/p/CLNeLh5Fzq8/')#link post
+startBot.comments(page)#link post
