@@ -4,11 +4,18 @@ import time
 import random
 import PySimpleGUI as sg
 
+<<<<<<< HEAD
 VARIANT_GLOBAL_GECKODRIVER = ''
 
 #login = input("Digite seu user:")
 #senha = input('digite sua senha:')
 #page = input('digite a URL da pagina:')
+=======
+
+login = input("Digite seu user:")
+senha = input('digite sua senha:')
+page = input('digite a URL da pagina:')
+>>>>>>> 71dfd81c89f96d2b2a98988246baedab1739f894
 
 class InstagramBot:
     
@@ -17,7 +24,11 @@ class InstagramBot:
     def __init__(self,login,senha):
         self.username = login
         self.password = senha
+<<<<<<< HEAD
         self.driver = webdriver.Firefox(executable_path=VARIANT_GLOBAL_GECKODRIVER) #
+=======
+        self.driver = webdriver.Firefox(executable_path="C:\\Users\\silvi\\Documents\\geckodriver.exe")
+>>>>>>> 71dfd81c89f96d2b2a98988246baedab1739f894
 
 
     def login(self):
@@ -43,12 +54,17 @@ class InstagramBot:
 
     def comments(self,link):
         archive = open('wordlist.txt','r')
+<<<<<<< HEAD
         comentario =  archive.readlines()#Wordlist
+=======
+        comentario =  archive.readline()#Wordlist
+>>>>>>> 71dfd81c89f96d2b2a98988246baedab1739f894
         driver =self.driver
         driver.get(link)
         driver.find_element_by_class_name('Ypffh').click()
         comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
         time.sleep(3)
+<<<<<<< HEAD
         i = 0
         for comment in comentario:
             self.typing_method(comment,comment_input)
@@ -68,3 +84,16 @@ class InstagramBot:
 startBot = InstagramBot('accountbottest1', 'bottest123')#Username & password
 startBot.login()
 startBot.comments('https://www.instagram.com/p/CLNeLh5Fzq8/')#link post
+=======
+        for i in range(10):
+            self.typing_method(random.choices(comentario),comment_input)
+            comment_button = driver.find_element_by_xpath("//button[@type='submit']")
+            comment_button.click()
+            time.sleep(10)
+
+
+
+startBot = InstagramBot(login, senha)#Username & password
+startBot.login()
+startBot.comments(page)#link post
+>>>>>>> 71dfd81c89f96d2b2a98988246baedab1739f894
