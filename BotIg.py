@@ -2,14 +2,22 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import random
+import PySimpleGUI as sg
+
+
+login = input("Digite seu user:")
+senha = input('digite sua senha:')
+page = input('digite a URL da pagina:')
 
 class InstagramBot:
     
+  
 
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.driver = webdriver.Firefox(executable_path=".\\geckodriver.exe")
+    def __init__(self,login,senha):
+        self.username = login
+        self.password = senha
+        self.driver = webdriver.Firefox(executable_path="C:\\Users\\silvi\\Documents\\geckodriver.exe")
+
 
     def login(self):
         driver = self.driver
@@ -33,20 +41,21 @@ class InstagramBot:
             time.sleep(random.randint(1,8)/30)
 
     def comments(self,link):
-        
-        comentario = [] #Wordlist
+        archive = open('wordlist.txt','r')
+        comentario =  archive.readline()#Wordlist
         driver =self.driver
-        driver.get("https://www.instagram.com/" + link)
+        driver.get(link)
         driver.find_element_by_class_name('Ypffh').click()
         comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
         time.sleep(3)
-        for i in range(5):
-            self.typing_method(random.choice(comentario),comment_input)
+        for i in range(10):
+            self.typing_method(random.choices(comentario),comment_input)
             comment_button = driver.find_element_by_xpath("//button[@type='submit']")
             comment_button.click()
+            time.sleep(10)
 
 
 
-startBot = InstagramBot()#Username & password
+startBot = InstagramBot(login, senha)#Username & password
 startBot.login()
-startBot.comments()#link post
+startBot.comments(page)#link post
