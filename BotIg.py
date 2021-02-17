@@ -17,7 +17,7 @@ class InstagramBot:
     def __init__(self,login,senha):
         self.username = login
         self.password = senha
-        self.driver = webdriver.Firefox(executable_path=VARIANT_GLOBAL_GECKODRIVER) #
+        self.driver = webdriver.Firefox(executable_path=VARIANT_GLOBAL_GECKODRIVER) #geckodriver
 
 
     def login(self):
@@ -50,13 +50,17 @@ class InstagramBot:
         comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
         time.sleep(3)
         i = 0
-        for comment in comentario:
-            self.typing_method(comment,comment_input)
+        while True: 
+            controller = []
+            controller.extend(comentario)
+            del comentario [:2]
+            self.typing_method(controller[0],comment_input)
+            self.typing_method(controller[1],comment_input)
             comment_button = driver.find_element_by_xpath("//button[@type='submit']")
             comment_button.click()
-            time.sleep(40)
-            if (i == 5):
-                time.sleep(1200)
+            time.sleep(90)
+            if (i == 10):
+                time.sleep(3600)
                 i = 0
             else:
                 i += 1
