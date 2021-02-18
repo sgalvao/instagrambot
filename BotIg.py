@@ -5,8 +5,9 @@ import random
 import PySimpleGUI as sg
 import getpass
 
-VARIANT_GLOBAL_GECKODRIVER = 'C:\\Users\\silvi\\Documents\\geckodriver.exe'
+VARIANT_GLOBAL_GECKODRIVER = ''
 
+diretory = input('Passe o diretorio do Geckodriver:')
 login = input("Digite seu user:")
 senha = getpass.getpass('digite sua senha:')
 page = input('digite a URL da pagina:')
@@ -18,7 +19,7 @@ class InstagramBot:
     def __init__(self,login,senha):
         self.username = login
         self.password = senha
-        self.driver = webdriver.Firefox(executable_path=VARIANT_GLOBAL_GECKODRIVER) #geckodriver
+        self.driver = webdriver.Firefox(executable_path=diretory) #geckodriver
 
 
     def login(self):
