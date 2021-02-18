@@ -64,9 +64,10 @@ class InstagramBot:
             comment_button.click()
             time.sleep(2)
             driver.refresh()
-            time.sleep(35)
+            print(i)
+            time.sleep(50)
             if (i == 35):
-                time.sleep(3600)
+                time.sleep(2100)
                 i = 0
             else:
                 i += 1
