@@ -3,11 +3,12 @@ from selenium.webdriver.common.keys import Keys
 import time
 import random
 import PySimpleGUI as sg
+import getpass
 
-VARIANT_GLOBAL_GECKODRIVER = ''
+VARIANT_GLOBAL_GECKODRIVER = 'C:\\Users\\silvi\\Documents\\geckodriver.exe'
 
 login = input("Digite seu user:")
-senha = input('digite sua senha:')
+senha = getpass.getpass('digite sua senha:')
 page = input('digite a URL da pagina:')
 
 class InstagramBot:
@@ -46,11 +47,14 @@ class InstagramBot:
         comentario =  archive.readlines()#Wordlist
         driver =self.driver
         driver.get(link)
-        driver.find_element_by_class_name('Ypffh').click()
-        comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
+        #driver.find_element_by_class_name('Ypffh').click()
+        #comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
         time.sleep(3)
         i = 0
         while True: 
+            driver.find_element_by_class_name('Ypffh').click()
+            comment_input = driver.find_element_by_class_name('Ypffh')
+            time.sleep(3)
             controller = []
             controller.extend(comentario)
             del comentario [:2]
@@ -58,8 +62,10 @@ class InstagramBot:
             self.typing_method(controller[1],comment_input)
             comment_button = driver.find_element_by_xpath("//button[@type='submit']")
             comment_button.click()
-            time.sleep(90)
-            if (i == 10):
+            time.sleep(2)
+            driver.refresh()
+            time.sleep(35)
+            if (i == 35):
                 time.sleep(3600)
                 i = 0
             else:
