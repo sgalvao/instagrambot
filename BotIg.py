@@ -2,10 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import random
-import PySimpleGUI as sg
 import getpass
 
-VARIANT_GLOBAL_GECKODRIVER = ''
+
+
 
 diretory = input('Passe o diretorio do Geckodriver:')
 login = input("Digite seu user:")
@@ -48,33 +48,41 @@ class InstagramBot:
         comentario =  archive.readlines()#Wordlist
         driver =self.driver
         driver.get(link)
-        #driver.find_element_by_class_name('Ypffh').click()
-        #comment_input = driver.find_element_by_class_name('Ypffh')#campo do comentario
         time.sleep(3)
-        i = 0
+        i = 1
+        contador = 1
         while True: 
             driver.find_element_by_class_name('Ypffh').click()
             comment_input = driver.find_element_by_class_name('Ypffh')
             time.sleep(3)
             controller = []
             controller.extend(comentario)
-            del comentario [:2]
+            del comentario[:2]
             self.typing_method(controller[0],comment_input)
             self.typing_method(controller[1],comment_input)
             comment_button = driver.find_element_by_xpath("//button[@type='submit']")
             comment_button.click()
-            time.sleep(2)
-            driver.refresh()
-            print(i)
-            time.sleep(50)
-            if (i == 35):
-                time.sleep(2100)
-                i = 0
+            try:
+                time.sleep(2)
+                driver.find_element_by_class_name('gxNyb')
+                #driver.find_element_by_xpath("//button[contains(text(), 'Tentar novamente')]")
+                #tryAgain.click()
+                driver.refresh()
+                contador -= 1
+                i -= 1
+                print(controller[0], controller[1],' ###ERROR###')
+            except:
+             print(controller[0], controller[1],) 
+             print('Comentario publicado:', contador) #acrescentar 287 na soma de comentarios.
+             time.sleep(random.randint(30,45))
+            if (i == 50):
+                
+                time.sleep(random.randint(3600, 3700))
+                i = 1
             else:
-                i += 1
-            
+                 i += 1 
+                 contador += 1          
         
-
 
 
 startBot = InstagramBot(login, senha )#Username & password
